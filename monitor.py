@@ -71,22 +71,66 @@ def fetch_combo(origin, dest, dep, ret):
         return None
     best = min(priced, key=lambda f: f.price)
 
-    dep_time = ""
-    try:
-        t = best.flights[0].departure.time  # (H, M)
-        dep_time = f"{t[0]:02d}:{t[1]:02d}"
-    except Exception:
-        pass
-
-    return {
+    info = {
         "price": best.price,
         "airlines": "／".join(best.airlines) if best.airlines else "—",
-        "dep_time": dep_time,
+        "code": getattr(best, "type", "") or "",
+        "stops": max(0, len(best.flights) - 1),
+        "out_from": "", "out_to": "", "out_dep": "", "out_arr": "",
+        "out_dur": "", "plane": "",
         "url": q.url(),
     }
+    try:
+        leg = best.flights[0]  # 去程首段
+        dt, at = leg.departure.time, leg.arrival.time
+        info["out_from"] = getattr(leg.from_airport, "code", origin)
+        info["out_to"] = getattr(leg.to_airport, "code", dest)
+        info["out_dep"] = f"{dt[0]:02d}:{dt[1]:02d}"
+        info["out_arr"] = f"{at[0]:02d}:{at[1]:02d}"
+        d = leg.duration or 0
+        info["out_dur"] = f"{d // 60}h{d % 60:02d}m"
+        info["plane"] = leg.plane_type or ""
+    except Exception:
+        pass
+    return info
 
 
 # ── 訊息排版（沿用 LINE 分段條列風格）──────────────────
+def _md(iso):
+    """'2027-01-28' -> '1/28'"""
+    try:
+        _, m, d = iso.split("-")
+        return f"{int(m)}/{int(d)}"
+    except Exception:
+        return iso
+
+
+def _detail_block(r):
+    """完整航班資訊區塊（多行）。"""
+    stops = "直飛" if r.get("stops", 0) == 0 else f"轉機 {r['stops']} 次"
+    code = f" {r['code']}" if r.get("code") else ""
+    lines = [
+        f"🛫 {r['o_name']} {r['origin']} → {r['d_name']} {r['dest']}",
+        f"📅 去 {_md(r['dep'])} → 回 {_md(r['ret'])}（{config.NIGHTS} 晚）",
+        f"✈️ {r['airlines']}{code}｜{stops}",
+    ]
+    if r.get("out_dep"):
+        plane = f", {r['plane']}" if r.get("plane") else ""
+        lines.append(
+            f"　去程 {r['out_from']} {r['out_dep']} → {r['out_to']} {r['out_arr']}"
+            f"（{r['out_dur']}{plane}）"
+        )
+    lines.append("　回程 訂票頁選（此為來回總價）")
+    return lines
+
+
+def _one_liner(r):
+    """其他達標的一行摘要（含班次時間）。"""
+    seg = f" {r['out_dep']}→{r['out_arr']}" if r.get("out_dep") else ""
+    return (f"• {r['o_name']}{r['origin']}→{r['d_name']}{r['dest']} "
+            f"NT${r['price']:,}｜{r['airlines']}{seg}")
+
+
 def build_message(hits, cheapest):
     """hits: 這次觸發推播的組合（≤門檻）；cheapest: 全窗口最便宜（不論是否達標）。"""
     lines = []
@@ -95,30 +139,24 @@ def build_message(hits, cheapest):
         lines.append(f"✈️ 日本機票監控｜{len(hits)} 個達標（≤ NT${config.THRESHOLD_TWD:,}）")
         lines.append("")
         lines.append(f"💰 最低 NT${top['price']:,}")
-        lines.append(f"🛫 {top['o_name']} {top['origin']} → {top['d_name']} {top['dest']}")
-        lines.append(f"📅 去 {top['dep']} → 回 {top['ret']}（{config.NIGHTS} 晚）")
-        lines.append(f"🏢 {top['airlines']}｜{top['dep_time']} 出發")
+        lines += _detail_block(top)
         lines.append("")
-        lines.append(f"🔗 訂票（Google Flights）")
+        lines.append("🔗 訂票（Google Flights，可選回程）")
         lines.append(top["url"])
         if len(hits) > 1:
             lines.append("")
             lines.append("其他達標：")
             for h in hits[1:8]:
-                lines.append(
-                    f"• {h['origin']}→{h['dest']} {h['dep']}→{h['ret']} "
-                    f"NT${h['price']:,}（{h['airlines']}）"
-                )
+                lines.append(_one_liner(h))
     else:
         # ALWAYS_REPORT：沒達標時回報目前最便宜
         lines.append("✈️ 日本機票監控｜目前無達標票（回報現況）")
         lines.append("")
         if cheapest:
             lines.append(f"💡 目前全窗口最低 NT${cheapest['price']:,}（目標 NT${config.THRESHOLD_TWD:,}）")
-            lines.append(f"🛫 {cheapest['o_name']} {cheapest['origin']} → {cheapest['d_name']} {cheapest['dest']}")
-            lines.append(f"📅 去 {cheapest['dep']} → 回 {cheapest['ret']}（{config.NIGHTS} 晚）")
-            lines.append(f"🏢 {cheapest['airlines']}")
+            lines += _detail_block(cheapest)
             lines.append("")
+            lines.append("🔗 訂票（Google Flights，可選回程）")
             lines.append(cheapest["url"])
         else:
             lines.append("（這輪沒抓到任何有效票價，可能被限流或無航班）")
