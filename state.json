@@ -1,4 +1,84 @@
 {
   "threshold_twd": 20000,
-  "combos": {}
+  "combos": {
+    "KHH-OKA-2027-01-31": {
+      "lowest_twd": 12430,
+      "last_twd": 12430,
+      "below_threshold_alerted": true,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-OKA-2027-02-01": {
+      "lowest_twd": 18799,
+      "last_twd": 18799,
+      "below_threshold_alerted": true,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-ISG-2027-01-31": {
+      "lowest_twd": 11952,
+      "last_twd": 11952,
+      "below_threshold_alerted": true,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-NGO-2027-02-01": {
+      "lowest_twd": 32691,
+      "last_twd": 32691,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-FUK-2027-01-31": {
+      "lowest_twd": 37524,
+      "last_twd": 37524,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-FUK-2027-02-01": {
+      "lowest_twd": 37524,
+      "last_twd": 37524,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-TYO-2027-01-31": {
+      "lowest_twd": 21148,
+      "last_twd": 21148,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-TYO-2027-02-01": {
+      "lowest_twd": 24188,
+      "last_twd": 24188,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-OSA-2027-01-31": {
+      "lowest_twd": 31732,
+      "last_twd": 31732,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "KHH-CTS-2027-02-01": {
+      "lowest_twd": 37387,
+      "last_twd": 37387,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "RMQ-OKA-2027-01-31": {
+      "lowest_twd": 18500,
+      "last_twd": 18500,
+      "below_threshold_alerted": true,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "RMQ-OKA-2027-02-01": {
+      "lowest_twd": 21876,
+      "last_twd": 21876,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    },
+    "RMQ-NGO-2027-02-01": {
+      "lowest_twd": 25991,
+      "last_twd": 25991,
+      "below_threshold_alerted": false,
+      "last_seen": "2026-10-12T08:57:56+08:00"
+    }
+  },
+  "updated": "2026-10-12T08:59:41+08:00"
 }
