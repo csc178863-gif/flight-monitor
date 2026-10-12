@@ -32,6 +32,7 @@ jobs:
 
       - name: Run monitor
         env:
+          GMN_API_KEY: ${{ secrets.GMN_API_KEY }}
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
           ALWAYS_REPORT: ${{ github.event.inputs.always_report }}
