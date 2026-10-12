@@ -5,13 +5,13 @@
       "lowest_twd": 12430,
       "last_twd": 12439,
       "below_threshold_alerted": true,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "KHH-OKA-2027-02-01": {
       "lowest_twd": 18799,
       "last_twd": 18799,
       "below_threshold_alerted": true,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "KHH-ISG-2027-01-31": {
       "lowest_twd": 11952,
@@ -23,13 +23,13 @@
       "lowest_twd": 32691,
       "last_twd": 32691,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "KHH-FUK-2027-01-31": {
       "lowest_twd": 37524,
       "last_twd": 37524,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "KHH-FUK-2027-02-01": {
       "lowest_twd": 37524,
@@ -53,38 +53,38 @@
       "lowest_twd": 31732,
       "last_twd": 31732,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "KHH-CTS-2027-02-01": {
       "lowest_twd": 37387,
       "last_twd": 37387,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "RMQ-OKA-2027-01-31": {
       "lowest_twd": 18500,
       "last_twd": 18500,
       "below_threshold_alerted": true,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "RMQ-OKA-2027-02-01": {
       "lowest_twd": 21876,
       "last_twd": 21876,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "RMQ-NGO-2027-02-01": {
       "lowest_twd": 25991,
       "last_twd": 25991,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     },
     "KHH-OSA-2027-02-01": {
       "lowest_twd": 29673,
       "last_twd": 29673,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-12T11:04:26+08:00"
+      "last_seen": "2026-10-12T11:14:47+08:00"
     }
   },
-  "updated": "2026-10-12T11:06:10+08:00"
+  "updated": "2026-10-12T11:16:46+08:00"
 }
