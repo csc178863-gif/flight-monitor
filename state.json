@@ -11,13 +11,13 @@
       "lowest_twd": 18799,
       "last_twd": 18799,
       "below_threshold_alerted": true,
-      "last_seen": "2026-10-15T03:06:51+08:00"
+      "last_seen": "2026-10-15T06:55:02+08:00"
     },
     "KHH-ISG-2027-01-31": {
       "lowest_twd": 11952,
       "last_twd": 12452,
       "below_threshold_alerted": true,
-      "last_seen": "2026-10-15T03:06:51+08:00"
+      "last_seen": "2026-10-15T06:55:02+08:00"
     },
     "KHH-NGO-2027-02-01": {
       "lowest_twd": 32691,
@@ -27,21 +27,21 @@
     },
     "KHH-FUK-2027-01-31": {
       "lowest_twd": 37520,
-      "last_twd": 37520,
+      "last_twd": 37551,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-15T03:06:51+08:00"
+      "last_seen": "2026-10-15T06:55:02+08:00"
     },
     "KHH-FUK-2027-02-01": {
       "lowest_twd": 37520,
-      "last_twd": 37520,
+      "last_twd": 37551,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-15T03:06:51+08:00"
+      "last_seen": "2026-10-15T06:55:02+08:00"
     },
     "KHH-TYO-2027-01-31": {
       "lowest_twd": 21142,
-      "last_twd": 22805,
+      "last_twd": 22855,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-14T22:49:03+08:00"
+      "last_seen": "2026-10-15T06:55:02+08:00"
     },
     "KHH-TYO-2027-02-01": {
       "lowest_twd": 20305,
@@ -51,9 +51,9 @@
     },
     "KHH-OSA-2027-01-31": {
       "lowest_twd": 31329,
-      "last_twd": 31329,
+      "last_twd": 31369,
       "below_threshold_alerted": false,
-      "last_seen": "2026-10-14T07:33:03+08:00"
+      "last_seen": "2026-10-15T06:55:02+08:00"
     },
     "KHH-CTS-2027-02-01": {
       "lowest_twd": 36187,
@@ -65,7 +65,7 @@
       "lowest_twd": 18499,
       "last_twd": 18624,
       "below_threshold_alerted": true,
-      "last_seen": "2026-10-15T03:06:51+08:00"
+      "last_seen": "2026-10-15T06:55:02+08:00"
     },
     "RMQ-OKA-2027-02-01": {
       "lowest_twd": 21830,
@@ -92,5 +92,5 @@
       "last_seen": "2026-10-15T03:06:51+08:00"
     }
   },
-  "updated": "2026-10-15T03:08:35+08:00"
+  "updated": "2026-10-15T06:56:52+08:00"
 }
