@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""日本機票監控：掃過整個日期窗口 × 台灣南部出發 × 日本各區，
+"""日本機票監控：掃過設定的出發機場 × 日期窗口 × 日本各區，
 找出符合預算（THRESHOLD_TWD）的來回票，出現新低或首次跌破門檻時推播到 LINE。
 
 用法：
@@ -16,7 +16,7 @@ import os
 import random
 import sys
 import time
-from datetime import datetime, timezone, timedelta
+from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
 import requests
@@ -135,7 +135,8 @@ def _detail_block(r):
 
     lines = [
         f"🛫 {r['o_name']} {r['origin']} → {r['d_name']} {r['dest']}",
-        f"📅 去 {_md(r['dep'])} → 回 {_md(r['ret'])}（{config.NIGHTS} 晚）",
+        f"📅 去 {_md(r['dep'])} → 回 {_md(r['ret'])}"
+        f"（{(date.fromisoformat(r['ret']) - date.fromisoformat(r['dep'])).days} 晚）",
         f"✈️ {r['airlines']}{code}｜{stops}",
     ]
 
@@ -286,7 +287,8 @@ def main():
         for dest, d_name in config.DESTS.items():
             for dep, ret in pairs:
                 i += 1
-                key = f"{origin}-{dest}-{dep.isoformat()}"
+                # 每組去回程日期使用獨立識別碼，避免 7/8/9 晚的價格紀錄互相覆蓋。
+                key = f"{origin}-{dest}-{dep.isoformat()}-{ret.isoformat()}"
 
                 try:
                     r = fetch_combo(origin, dest, dep, ret)
@@ -322,6 +324,13 @@ def main():
                 all_priced.append(rec)
 
                 prev = combos.get(key, {})
+
+                # 相容舊版 state.json：舊版只用出發日作為 key，且原本固定 7 晚。
+                # 僅在 7 晚組合尚無新紀錄時，沿用舊紀錄，避免無謂重複通知。
+                if not prev and (ret - dep).days == 7:
+                    legacy_key = f"{origin}-{dest}-{dep.isoformat()}"
+                    prev = combos.get(legacy_key, {})
+
                 prev_low = prev.get("lowest_twd")
                 prev_alerted = prev.get("below_threshold_alerted", False)
 
