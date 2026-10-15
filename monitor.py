@@ -1,4 +1,4 @@
-```python
+
 #!/usr/bin/env python3
 """日本機票監控：掃過設定的出發機場 × 日期窗口 × 日本各區，
 找出符合預算（THRESHOLD_TWD）的來回票。
