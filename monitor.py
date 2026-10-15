@@ -16,7 +16,6 @@ LINE 通知規則：
     python monitor.py
     DRY_RUN=1 python monitor.py
     ALWAYS_REPORT=1 python monitor.py
-"""
 
 import json
 import os
@@ -425,4 +424,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-```
