@@ -439,16 +439,17 @@ def build_message(hits, cheapest):
 
 
 # ── LINE Messaging API 推播 ────────────────────────────
+
 def push_line(message):
-    """使用 LINE Messaging API，將文字訊息推播給指定的 LINE 使用者。"""
+    """使用 LINE Broadcast API，推播給已加入官方帳號好友且可接收訊息的使用者。"""
 
     if DRY_RUN:
         print("── [DRY_RUN] 以下訊息不會送出 ──\n" + message)
         return
 
-    if not LINE_CHANNEL_ACCESS_TOKEN or not LINE_USER_ID:
+    if not LINE_CHANNEL_ACCESS_TOKEN:
         print(
-            "⚠️ 缺少 LINE_CHANNEL_ACCESS_TOKEN 或 LINE_USER_ID，"
+            "⚠️ 缺少 LINE_CHANNEL_ACCESS_TOKEN，"
             "跳過推播。請檢查 GitHub Repository Secrets。"
         )
         return
@@ -456,7 +457,8 @@ def push_line(message):
     if len(message) > 4900:
         message = message[:4900] + "\n（訊息過長，已截斷）"
 
-    url = "https://api.line.me/v2/bot/message/push"
+    # 改用 Broadcast：不再指定單一 LINE_USER_ID
+    url = "https://api.line.me/v2/bot/message/broadcast"
 
     headers = {
         "Authorization": f"Bearer {LINE_CHANNEL_ACCESS_TOKEN}",
@@ -464,7 +466,6 @@ def push_line(message):
     }
 
     payload = {
-        "to": LINE_USER_ID,
         "messages": [
             {
                 "type": "text",
@@ -481,16 +482,16 @@ def push_line(message):
             timeout=30,
         )
 
-        print(f"LINE 推播結果 HTTP {response.status_code}")
+        print(f"LINE 廣播推播結果 HTTP {response.status_code}")
 
         if not response.ok:
             print(f"LINE API 錯誤訊息：{response.text[:1000]}")
 
         response.raise_for_status()
-        print("✅ LINE 推播請求成功。")
+        print("✅ LINE 廣播推播請求成功。")
 
     except requests.RequestException as e:
-        print(f"❌ LINE 推播失敗：{type(e).__name__}: {e}")
+        print(f"❌ LINE 廣播推播失敗：{type(e).__name__}: {e}")
         raise
 
 
