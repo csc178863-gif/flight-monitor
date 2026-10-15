@@ -170,12 +170,13 @@ def _detail_block(r):
 
 
 def _one_liner(r):
-    """其他達標的一行摘要（含班次時間）。"""
+    """其他達標的一行摘要（含去回程日期及班次時間）。"""
 
     seg = f" {r['out_dep']}→{r['out_arr']}" if r.get("out_dep") else ""
 
     return (
-        f"• {r['o_name']}{r['origin']}→{r['d_name']}{r['dest']} "
+        f"• 去 {_md(r['dep'])} 回 {_md(r['ret'])}｜"
+        f"{r['o_name']}{r['origin']}→{r['d_name']}{r['dest']} "
         f"NT${r['price']:,}｜{r['airlines']}{seg}"
     )
 
