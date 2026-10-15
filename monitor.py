@@ -9,6 +9,7 @@ LINE 通知規則：
 3. 票價高於門檻時不通知，即使刷新歷史最低價也不通知。
 4. 票價反彈高於門檻時，保留已通知紀錄，避免再次跌回門檻時重複通知。
 5. ALWAYS_REPORT=1 可強制回報目前全窗口最低票價。
+6. 通知使用 LINE Broadcast API，傳送給符合接收條件的官方帳號好友。
 
 狀態存在 state.json，每個組合分別保存歷史最低價與通知紀錄。
 
@@ -17,6 +18,7 @@ LINE 通知規則：
     DRY_RUN=1 python monitor.py
     ALWAYS_REPORT=1 python monitor.py
 """
+
 import json
 import os
 import random
@@ -36,9 +38,10 @@ TPE = timezone(timedelta(hours=8))
 DRY_RUN = os.environ.get("DRY_RUN", "").lower() in ("1", "true", "yes")
 ALWAYS_REPORT = os.environ.get("ALWAYS_REPORT", "").lower() in ("1", "true", "yes")
 
-# LINE Messaging API 設定（從 GitHub Repository Secrets 讀取）
-LINE_CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "")
-LINE_USER_ID = os.environ.get("LINE_USER_ID", "")
+# LINE Messaging API：從 GitHub Repository Secrets 讀取
+LINE_CHANNEL_ACCESS_TOKEN = os.environ.get(
+    "LINE_CHANNEL_ACCESS_TOKEN", ""
+)
 
 
 # ── 狀態讀寫 ───────────────────────────────────────────
@@ -133,7 +136,7 @@ def fetch_combo(origin, dest, dep, ret):
 
 # ── 訊息排版 ───────────────────────────────────────────
 def _md(iso):
-    """'2027-01-28' -> '1/28'."""
+    """'2027-01-28' -> '1/28'。"""
     try:
         _, m, d = iso.split("-")
         return f"{int(m)}/{int(d)}"
@@ -204,6 +207,7 @@ def build_message(hits, cheapest):
             lines.append("")
             lines.append("其他達標：")
 
+            # 維持原本設定：最多列出 7 個其他組合
             for h in hits[1:8]:
                 lines.append(_one_liner(h))
 
@@ -230,26 +234,26 @@ def build_message(hits, cheapest):
     return "\n".join(lines)
 
 
-# ── LINE Messaging API 推播 ────────────────────────────
+# ── LINE Broadcast 群發推播 ────────────────────────────
 def push_line(message):
-    """使用 LINE Messaging API，將文字訊息推播給指定的 LINE 使用者。"""
+    """使用 LINE Broadcast API，傳送訊息給符合接收條件的官方帳號好友。"""
 
     if DRY_RUN:
         print("── [DRY_RUN] 以下訊息不會送出 ──\n" + message)
         return
 
-    if not LINE_CHANNEL_ACCESS_TOKEN or not LINE_USER_ID:
+    if not LINE_CHANNEL_ACCESS_TOKEN:
         print(
-            "⚠️ 缺少 LINE_CHANNEL_ACCESS_TOKEN 或 LINE_USER_ID，"
+            "⚠️ 缺少 LINE_CHANNEL_ACCESS_TOKEN，"
             "跳過推播。請檢查 GitHub Repository Secrets。"
         )
         return
 
-    # LINE 單則文字訊息上限為 5000 字元，預留部分空間避免超限
+    # LINE 單則文字訊息上限為 5000 字元，預留空間避免超限
     if len(message) > 4900:
         message = message[:4900] + "\n（訊息過長，已截斷）"
 
-    url = "https://api.line.me/v2/bot/message/push"
+    url = "https://api.line.me/v2/bot/message/broadcast"
 
     headers = {
         "Authorization": f"Bearer {LINE_CHANNEL_ACCESS_TOKEN}",
@@ -257,13 +261,12 @@ def push_line(message):
     }
 
     payload = {
-        "to": LINE_USER_ID,
         "messages": [
             {
                 "type": "text",
                 "text": message,
             }
-        ],
+        ]
     }
 
     try:
@@ -274,16 +277,16 @@ def push_line(message):
             timeout=30,
         )
 
-        print(f"LINE 推播結果 HTTP {response.status_code}")
+        print(f"LINE Broadcast 結果 HTTP {response.status_code}")
 
         if not response.ok:
             print(f"LINE API 錯誤訊息：{response.text[:1000]}")
 
         response.raise_for_status()
-        print("✅ LINE 推播請求成功。")
+        print("✅ LINE Broadcast 請求成功，已交由 LINE 處理。")
 
     except requests.RequestException as e:
-        print(f"❌ LINE 推播失敗：{type(e).__name__}: {e}")
+        print(f"❌ LINE Broadcast 失敗：{type(e).__name__}: {e}")
         raise
 
 
@@ -313,7 +316,7 @@ def main():
             for dep, ret in pairs:
                 i += 1
 
-                # 每組去回程日期使用獨立識別碼，避免 7/8/9 晚價格紀錄互相覆蓋。
+                # 每組去回程日期使用獨立識別碼
                 key = f"{origin}-{dest}-{dep.isoformat()}-{ret.isoformat()}"
 
                 try:
@@ -352,9 +355,7 @@ def main():
 
                 prev = combos.get(key, {})
 
-                # 相容舊版 state.json：
-                # 舊版只用出發日作為 key，原本固定 7 晚。
-                # 只有 7 晚組合尚無新紀錄時，才沿用舊紀錄。
+                # 相容舊版 state.json：舊版固定 7 晚的紀錄
                 if not prev and (ret - dep).days == 7:
                     legacy_key = f"{origin}-{dest}-{dep.isoformat()}"
                     prev = combos.get(legacy_key, {})
@@ -365,14 +366,10 @@ def main():
                 is_new_low = prev_low is None or price < prev_low
                 below = price <= config.THRESHOLD_TWD
 
-                # 通知規則：
-                # 1. 首次達到門檻時通知。
-                # 2. 已通知過，且目前達標並刷新歷史最低價時再次通知。
-                # 3. 價格反彈超過門檻時，保留已通知紀錄。
+                # 首次達標通知；已通知過則必須達標且刷新歷史最低價
                 trigger = below and (not prev_alerted or is_new_low)
 
-                # 保留歷史最低價；不能用 prev_low 的真假值判斷是否存在，
-                # 必須明確檢查 None。
+                # 保留歷史最低價
                 lowest_twd = (
                     min(price, prev_low)
                     if prev_low is not None
@@ -408,7 +405,7 @@ def main():
 
     print(
         f"\n掃描完成：抓到 {len(all_priced)} 筆有效票價，"
-        f"{len(hits)} 筆達標。全窗口最低 {cheapest_text}"
+        f"{len(hits)} 筆達標觸發。全窗口最低 {cheapest_text}"
     )
 
     save_state(state)
