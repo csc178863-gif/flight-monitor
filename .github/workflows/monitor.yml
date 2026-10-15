@@ -1,17 +1,22 @@
+
 name: flight-monitor
 
 on:
   schedule:
-    - cron: "0 * * * *" # 每小時一次（UTC；GitHub 可能延遲 5-15 分，屬正常）
+    - cron: "0 * * * *" # 每小時一次（UTC）
   workflow_dispatch:
     inputs:
+      validate_config:
+        description: "只驗證設定，不查詢航班、不推播 LINE"
+        type: boolean
+        default: true
       always_report:
-        description: "強制推播目前最便宜的票（測試推播管線用）"
+        description: "正式掃描後強制推播目前最便宜的票"
         type: boolean
         default: false
 
 permissions:
-  contents: write # 需要把 state.json 寫回 repo
+  contents: write
 
 concurrency:
   group: flight-monitor
@@ -20,17 +25,53 @@ concurrency:
 jobs:
   check:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
 
-      - run: pip install -r requirements.txt
+      - name: Validate config
+        run: |
+          python - <<'PY'
+          import config
+
+          pairs = config.date_pairs()
+          origins = config.ORIGINS
+          destinations = config.DESTS
+
+          assert "TPE" in origins, "缺少桃園 TPE"
+          assert config.WINDOW_START.isoformat() == "2027-01-23"
+          assert config.WINDOW_END.isoformat() == "2027-02-01"
+          assert len(pairs) == 30, f"日期組合應為 30 組，實際為 {len(pairs)} 組"
+          assert all(
+              (ret - dep).days in (7, 8, 9)
+              for dep, ret in pairs
+          ), "發現不是 7、8、9 晚的日期組合"
+          assert min(dep for dep, ret in pairs) == config.WINDOW_START
+          assert max(dep for dep, ret in pairs) == config.WINDOW_END
+          assert max(ret for dep, ret in pairs).isoformat() == "2027-02-10"
+
+          total = len(origins) * len(destinations) * len(pairs)
+
+          print("設定驗證成功")
+          print(f"出發機場：{len(origins)} 個")
+          print(f"目的地：{len(destinations)} 個")
+          print(f"日期組合：{len(pairs)} 組")
+          print(f"理論最大航班查詢數：{total} 組")
+          print("出發日期：2027-01-23 ～ 2027-02-01")
+          print("旅遊晚數：7、8、9 晚")
+          print("最晚回程日：2027-02-10")
+          PY
+
+      - name: Install dependencies
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.validate_config != true }}
+        run: pip install -r requirements.txt
 
       - name: Run monitor
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.validate_config != true }}
         env:
           GMN_API_KEY: ${{ secrets.GMN_API_KEY }}
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
@@ -39,6 +80,7 @@ jobs:
         run: python monitor.py
 
       - name: Commit updated state
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.validate_config != true }}
         run: |
           git config user.name "flight-bot"
           git config user.email "flight-bot@users.noreply.github.com"
