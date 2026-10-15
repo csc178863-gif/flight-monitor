@@ -1,14 +1,21 @@
+```python
 #!/usr/bin/env python3
 """日本機票監控：掃過設定的出發機場 × 日期窗口 × 日本各區，
-找出符合預算（THRESHOLD_TWD）的來回票，出現新低或首次跌破門檻時推播到 LINE。
+找出符合預算（THRESHOLD_TWD）的來回票。
+
+LINE 通知規則：
+1. 日期組合首次達到門檻（票價 <= THRESHOLD_TWD）時通知。
+2. 已通知過的日期組合，之後只有在達標且刷新歷史最低價時再次通知。
+3. 票價高於門檻時不通知，即使刷新歷史最低價也不通知。
+4. 票價反彈高於門檻時，保留已通知紀錄，避免再次跌回門檻時重複通知。
+5. ALWAYS_REPORT=1 可強制回報目前全窗口最低票價。
+
+狀態存在 state.json，每個組合分別保存歷史最低價與通知紀錄。
 
 用法：
     python monitor.py
     DRY_RUN=1 python monitor.py
     ALWAYS_REPORT=1 python monitor.py
-
-狀態存在 state.json（每個組合的歷史最低價 + 是否已通知），
-所以只在「出現新低」或「首次跌破門檻」時才推，不會洗版。
 """
 
 import json
@@ -41,20 +48,23 @@ def load_state():
         try:
             return json.loads(STATE_FILE.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
-            pass
+            print("⚠️ state.json 格式錯誤，將使用空白狀態。")
+
     return {"threshold_twd": config.THRESHOLD_TWD, "combos": {}}
 
 
 def save_state(state):
     state["updated"] = datetime.now(TPE).isoformat(timespec="seconds")
     STATE_FILE.write_text(
-        json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8"
+        json.dumps(state, ensure_ascii=False, indent=2),
+        encoding="utf-8",
     )
 
 
 # ── 抓單一組合的最低價 ─────────────────────────────────
 def fetch_combo(origin, dest, dep, ret):
     """回傳最便宜的來回結果 dict，抓不到回 None。"""
+
     q = create_query(
         flights=[
             FlightQuery(
@@ -78,6 +88,7 @@ def fetch_combo(origin, dest, dep, ret):
     )
 
     res = get_flights(q)
+
     priced = [
         f for f in res
         if isinstance(getattr(f, "price", None), int) and f.price > 0
@@ -105,13 +116,16 @@ def fetch_combo(origin, dest, dep, ret):
     try:
         leg = best.flights[0]
         dt, at = leg.departure.time, leg.arrival.time
+
         info["out_from"] = getattr(leg.from_airport, "code", origin)
         info["out_to"] = getattr(leg.to_airport, "code", dest)
         info["out_dep"] = f"{dt[0]:02d}:{dt[1]:02d}"
         info["out_arr"] = f"{at[0]:02d}:{at[1]:02d}"
+
         d = leg.duration or 0
         info["out_dur"] = f"{d // 60}h{d % 60:02d}m"
         info["plane"] = leg.plane_type or ""
+
     except Exception:
         pass
 
@@ -120,7 +134,7 @@ def fetch_combo(origin, dest, dep, ret):
 
 # ── 訊息排版 ───────────────────────────────────────────
 def _md(iso):
-    """'2027-01-28' -> '1/28'"""
+    """'2027-01-28' -> '1/28'."""
     try:
         _, m, d = iso.split("-")
         return f"{int(m)}/{int(d)}"
@@ -130,13 +144,16 @@ def _md(iso):
 
 def _detail_block(r):
     """完整航班資訊區塊（多行）。"""
+
     stops = "直飛" if r.get("stops", 0) == 0 else f"轉機 {r['stops']} 次"
     code = f" {r['code']}" if r.get("code") else ""
 
     lines = [
         f"🛫 {r['o_name']} {r['origin']} → {r['d_name']} {r['dest']}",
-        f"📅 去 {_md(r['dep'])} → 回 {_md(r['ret'])}"
-        f"（{(date.fromisoformat(r['ret']) - date.fromisoformat(r['dep'])).days} 晚）",
+        (
+            f"📅 去 {_md(r['dep'])} → 回 {_md(r['ret'])}"
+            f"（{(date.fromisoformat(r['ret']) - date.fromisoformat(r['dep'])).days} 晚）"
+        ),
         f"✈️ {r['airlines']}{code}｜{stops}",
     ]
 
@@ -149,12 +166,15 @@ def _detail_block(r):
         )
 
     lines.append("　回程 訂票頁選（此為來回總價）")
+
     return lines
 
 
 def _one_liner(r):
     """其他達標的一行摘要（含班次時間）。"""
+
     seg = f" {r['out_dep']}→{r['out_arr']}" if r.get("out_dep") else ""
+
     return (
         f"• {r['o_name']}{r['origin']}→{r['d_name']}{r['dest']} "
         f"NT${r['price']:,}｜{r['airlines']}{seg}"
@@ -163,10 +183,12 @@ def _one_liner(r):
 
 def build_message(hits, cheapest):
     """hits：這次觸發推播的組合；cheapest：全窗口最便宜的票。"""
+
     lines = []
 
     if hits:
         top = hits[0]
+
         lines.append(
             f"✈️ 日本機票監控｜{len(hits)} 個達標"
             f"（≤ NT${config.THRESHOLD_TWD:,}）"
@@ -181,6 +203,7 @@ def build_message(hits, cheapest):
         if len(hits) > 1:
             lines.append("")
             lines.append("其他達標：")
+
             for h in hits[1:8]:
                 lines.append(_one_liner(h))
 
@@ -197,11 +220,13 @@ def build_message(hits, cheapest):
             lines.append("")
             lines.append("🔗 訂票（Google Flights，可選回程）")
             lines.append(cheapest["url"])
+
         else:
             lines.append("（這輪沒抓到任何有效票價，可能被限流或無航班）")
 
     lines.append("")
     lines.append("⚠️ 過年檔期價格變動快，看到好價建議盡快下手")
+
     return "\n".join(lines)
 
 
@@ -287,11 +312,13 @@ def main():
         for dest, d_name in config.DESTS.items():
             for dep, ret in pairs:
                 i += 1
-                # 每組去回程日期使用獨立識別碼，避免 7/8/9 晚的價格紀錄互相覆蓋。
+
+                # 每組去回程日期使用獨立識別碼，避免 7/8/9 晚價格紀錄互相覆蓋。
                 key = f"{origin}-{dest}-{dep.isoformat()}-{ret.isoformat()}"
 
                 try:
                     r = fetch_combo(origin, dest, dep, ret)
+
                 except Exception as e:
                     print(
                         f"[{i}/{total}] {key} 抓取失敗："
@@ -325,8 +352,9 @@ def main():
 
                 prev = combos.get(key, {})
 
-                # 相容舊版 state.json：舊版只用出發日作為 key，且原本固定 7 晚。
-                # 僅在 7 晚組合尚無新紀錄時，沿用舊紀錄，避免無謂重複通知。
+                # 相容舊版 state.json：
+                # 舊版只用出發日作為 key，原本固定 7 晚。
+                # 只有 7 晚組合尚無新紀錄時，才沿用舊紀錄。
                 if not prev and (ret - dep).days == 7:
                     legacy_key = f"{origin}-{dest}-{dep.isoformat()}"
                     prev = combos.get(legacy_key, {})
@@ -337,13 +365,24 @@ def main():
                 is_new_low = prev_low is None or price < prev_low
                 below = price <= config.THRESHOLD_TWD
 
-                # 首次跌破門檻，或已達標後再次創新低，才觸發通知
+                # 通知規則：
+                # 1. 首次達到門檻時通知。
+                # 2. 已通知過，且目前達標並刷新歷史最低價時再次通知。
+                # 3. 價格反彈超過門檻時，保留已通知紀錄。
                 trigger = below and (not prev_alerted or is_new_low)
 
+                # 保留歷史最低價；不能用 prev_low 的真假值判斷是否存在，
+                # 必須明確檢查 None。
+                lowest_twd = (
+                    min(price, prev_low)
+                    if prev_low is not None
+                    else price
+                )
+
                 combos[key] = {
-                    "lowest_twd": min(price, prev_low) if prev_low else price,
+                    "lowest_twd": lowest_twd,
                     "last_twd": price,
-                    "below_threshold_alerted": below,
+                    "below_threshold_alerted": prev_alerted or below,
                     "last_seen": now_iso,
                 }
 
@@ -365,9 +404,7 @@ def main():
     all_priced.sort(key=lambda h: h["price"])
     cheapest = all_priced[0] if all_priced else None
 
-    cheapest_text = (
-        f"NT${cheapest['price']:,}" if cheapest else "—"
-    )
+    cheapest_text = f"NT${cheapest['price']:,}" if cheapest else "—"
 
     print(
         f"\n掃描完成：抓到 {len(all_priced)} 筆有效票價，"
@@ -378,11 +415,14 @@ def main():
 
     if hits:
         push_line(build_message(hits, cheapest))
+
     elif ALWAYS_REPORT:
         push_line(build_message([], cheapest))
+
     else:
         print("無達標票，不推播。")
 
 
 if __name__ == "__main__":
     sys.exit(main())
+```
