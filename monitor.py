@@ -1,7 +1,7 @@
 
 #!/usr/bin/env python3
 """日本機票監控：掃過設定的出發機場 × 日期窗口 × 日本各區，
-找出符合預算（THRESHOLD_TWD）的來回票。
+找出符合預算（THRESHOLD_TWD）的來回票，並排除可辨識的廉價航空。
 
 LINE 通知規則：
 1. 日期組合首次達到門檻（票價 <= THRESHOLD_TWD）時通知。
@@ -9,7 +9,10 @@ LINE 通知規則：
 3. 票價高於門檻時不通知，即使刷新歷史最低價也不通知。
 4. 票價反彈高於門檻時，保留已通知紀錄，避免再次跌回門檻時重複通知。
 5. ALWAYS_REPORT=1 可強制回報目前全窗口最低票價。
-6. 通知使用 LINE Broadcast API，傳送給符合接收條件的官方帳號好友。
+
+廉航過濾：
+在挑選每個日期組合的最低票價前，排除能從航空公司名稱或代碼辨識的廉航。
+若航空公司資訊缺失或無法辨識，則保留該結果，避免誤刪傳統航空。
 
 狀態存在 state.json，每個組合分別保存歷史最低價與通知紀錄。
 
@@ -38,10 +41,205 @@ TPE = timezone(timedelta(hours=8))
 DRY_RUN = os.environ.get("DRY_RUN", "").lower() in ("1", "true", "yes")
 ALWAYS_REPORT = os.environ.get("ALWAYS_REPORT", "").lower() in ("1", "true", "yes")
 
-# LINE Messaging API：從 GitHub Repository Secrets 讀取
-LINE_CHANNEL_ACCESS_TOKEN = os.environ.get(
-    "LINE_CHANNEL_ACCESS_TOKEN", ""
+# LINE Messaging API 設定（從 GitHub Repository Secrets 讀取）
+LINE_CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "")
+LINE_USER_ID = os.environ.get("LINE_USER_ID", "")
+
+
+# ── 廉航辨識 ───────────────────────────────────────────
+# 航空公司名稱可能因資料來源不同而使用英文、縮寫或品牌名稱。
+# 以下清單涵蓋多家常見廉航；不是全球完整名單。
+LOW_COST_AIRLINES = (
+    # 台灣、日本及東亞
+    "tigerair", "台灣虎航", "台湾虎航",
+    "peach", "樂桃", "乐桃",
+    "jetstar", "捷星",
+    "spring airlines", "spring japan", "春秋航空",
+    "zipair", "zip air",
+    "airasia", "air asia",
+    "vietjet", "越捷",
+    "hk express", "hong kong express", "香港快運",
+    "scoot", "酷航",
+    "cebu pacific", "宿霧太平洋",
+    "indigo", "interglobe aviation",
+    "spicejet",
+    "go first",
+    "batik air",
+    "lion air",
+    "citilink",
+    "firefly",
+    "malindo air",
+    "nokscoot",
+    "noks air",
+    "t'way", "tway", "德威航空",
+    "jin air", "真航空",
+    "jeju air", "濟州航空", "济州航空",
+    "air busan", "釜山航空",
+    "eastar jet", "易斯達航空",
+    "aero k",
+    "air premia",
+    "peach aviation",
+    "air do", "airdo",
+    "solaseed air",
+    "starflyer",
+    "skymark",
+    "spring airlines japan",
+
+    # 歐洲
+    "ryanair",
+    "easyjet", "easy jet",
+    "wizz air", "wizzair",
+    "vueling",
+    "volotea",
+    "transavia",
+    "jet2",
+    "norwegian air",
+    "eurowings",
+    "flybe",
+    "play airlines",
+    "french bee",
+    "condor",
+
+    # 北美
+    "southwest airlines",
+    "spirit airlines",
+    "frontier airlines",
+    "allegiant air",
+    "sun country airlines",
+    "breeze airways",
+    "aer lingus",
+
+    # 中東及其他地區
+    "air arabia",
+    "flydubai",
+    "flynas",
+    "flyadeal",
+    "pegasus airlines",
+    "sunexpress",
+    "azul brazil",
+    "gol airlines",
+    "jetblue",
 )
+
+# 航空公司代碼：只有在資料明確提供代碼時才用代碼判斷。
+# 代碼清單並非完整；名稱比對仍會優先使用。
+LOW_COST_CODES = {
+    "IT",  # 台灣虎航
+    "MM",  # 樂桃
+    "GK",  # 捷星日本
+    "JQ",  # 捷星
+    "3K",  # 捷星亞洲
+    "9C",  # 春秋航空
+    "IJ",  # 春秋航空日本
+    "ZG",  # ZIPAIR
+    "TR",  # 酷航
+    "AK",  # AirAsia
+    "D7",  # AirAsia X
+    "FD",  # Thai AirAsia
+    "QZ",  # Indonesia AirAsia
+    "VJ",  # VietJet
+    "VZ",  # Thai VietJet
+    "UO",  # HK Express
+    "5J",  # Cebu Pacific
+    "6E",  # IndiGo
+    "SG",  # SpiceJet
+    "7C",  # Jeju Air
+    "TW",  # T'way Air
+    "LJ",  # Jin Air
+    "BX",  # Air Busan
+    "ZE",  # Eastar Jet
+    "RF",  # Aero K
+    "FR",  # Ryanair
+    "U2",  # easyJet
+    "W6",  # Wizz Air
+    "VY",  # Vueling
+    "LS",  # Jet2
+    "HV",  # Transavia
+    "DY",  # Norwegian
+    "F9",  # Frontier
+    "NK",  # Spirit
+    "WN",  # Southwest
+    "G4",  # Allegiant
+    "SY",  # Sun Country
+    "PC",  # Pegasus
+    "G9",  # Air Arabia
+}
+
+
+def _airline_names(airlines):
+    """將航空公司資料轉成可比對的名稱清單。"""
+
+    if not airlines:
+        return []
+
+    if isinstance(airlines, str):
+        items = [airlines]
+    else:
+        try:
+            items = list(airlines)
+        except TypeError:
+            items = [airlines]
+
+    names = []
+
+    for item in items:
+        if item is None:
+            continue
+
+        # 若來源回傳的是航空公司物件，嘗試取名稱或代碼。
+        if isinstance(item, str):
+            name = item
+        else:
+            name = (
+                getattr(item, "name", None)
+                or getattr(item, "code", None)
+                or str(item)
+            )
+
+        name = str(name).strip()
+        if name:
+            names.append(name)
+
+    return names
+
+
+def _is_low_cost(airlines):
+    """只要其中一家航空公司可辨識為廉航，就排除該票價結果。"""
+
+    names = _airline_names(airlines)
+
+    # 航空公司資訊缺失時無法可靠判定，不直接排除。
+    if not names:
+        return False
+
+    for name in names:
+        normalized = name.casefold().replace("_", " ").strip()
+        compact = "".join(ch for ch in normalized if ch.isalnum())
+
+        # 比對已知廉航名稱及常見品牌名稱。
+        for keyword in LOW_COST_AIRLINES:
+            keyword_normalized = keyword.casefold().replace("_", " ").strip()
+            keyword_compact = "".join(
+                ch for ch in keyword_normalized if ch.isalnum()
+            )
+
+            if keyword_normalized in normalized or (
+                keyword_compact and keyword_compact in compact
+            ):
+                return True
+
+        # 只在名稱本身是兩字元航空公司代碼時判斷，降低誤判。
+        if normalized.upper() in LOW_COST_CODES:
+            return True
+
+        # 兼容「航空公司名稱（代碼）」等格式。
+        import re
+
+        codes = re.findall(r"\b[A-Z0-9]{2}\b", name.upper())
+        if any(code in LOW_COST_CODES for code in codes):
+            return True
+
+    return False
 
 
 # ── 狀態讀寫 ───────────────────────────────────────────
@@ -65,7 +263,7 @@ def save_state(state):
 
 # ── 抓單一組合的最低價 ─────────────────────────────────
 def fetch_combo(origin, dest, dep, ret):
-    """回傳最便宜的來回結果 dict，抓不到回 None。"""
+    """回傳排除可辨識廉航後的最低來回結果，抓不到回 None。"""
 
     q = create_query(
         flights=[
@@ -91,9 +289,12 @@ def fetch_combo(origin, dest, dep, ret):
 
     res = get_flights(q)
 
+    # 先過濾無效價格，再排除可辨識廉航，最後才挑選最低價。
     priced = [
         f for f in res
-        if isinstance(getattr(f, "price", None), int) and f.price > 0
+        if isinstance(getattr(f, "price", None), int)
+        and f.price > 0
+        and not _is_low_cost(getattr(f, "airlines", None))
     ]
 
     if not priced:
@@ -103,7 +304,7 @@ def fetch_combo(origin, dest, dep, ret):
 
     info = {
         "price": best.price,
-        "airlines": "／".join(best.airlines) if best.airlines else "—",
+        "airlines": "／".join(_airline_names(best.airlines)) or "—",
         "code": getattr(best, "type", "") or "",
         "stops": max(0, len(best.flights) - 1),
         "out_from": "",
@@ -136,7 +337,7 @@ def fetch_combo(origin, dest, dep, ret):
 
 # ── 訊息排版 ───────────────────────────────────────────
 def _md(iso):
-    """'2027-01-28' -> '1/28'。"""
+    """'2027-01-28' -> '1/28'."""
     try:
         _, m, d = iso.split("-")
         return f"{int(m)}/{int(d)}"
@@ -185,7 +386,7 @@ def _one_liner(r):
 
 
 def build_message(hits, cheapest):
-    """hits：這次觸發推播的組合；cheapest：全窗口最便宜的票。"""
+    """hits：這次觸發推播的組合；cheapest：全窗口最低票價。"""
 
     lines = []
 
@@ -194,7 +395,7 @@ def build_message(hits, cheapest):
 
         lines.append(
             f"✈️ 日本機票監控｜{len(hits)} 個達標"
-            f"（≤ NT${config.THRESHOLD_TWD:,}）"
+            f"（≤ NT${config.THRESHOLD_TWD:,}，已排除可辨識廉航）"
         )
         lines.append("")
         lines.append(f"💰 最低 NT${top['price']:,}")
@@ -207,12 +408,15 @@ def build_message(hits, cheapest):
             lines.append("")
             lines.append("其他達標：")
 
-            # 維持原本設定：最多列出 7 個其他組合
             for h in hits[1:8]:
                 lines.append(_one_liner(h))
 
+            if len(hits) > 8:
+                lines.append(f"（另有 {len(hits) - 8} 組達標組合未列出）")
+
     else:
         lines.append("✈️ 日本機票監控｜目前無達標票（回報現況）")
+        lines.append("（已排除可辨識的廉價航空）")
         lines.append("")
 
         if cheapest:
@@ -226,7 +430,7 @@ def build_message(hits, cheapest):
             lines.append(cheapest["url"])
 
         else:
-            lines.append("（這輪沒抓到任何有效票價，可能被限流或無航班）")
+            lines.append("（這輪沒有符合篩選條件的有效票價）")
 
     lines.append("")
     lines.append("⚠️ 過年檔期價格變動快，看到好價建議盡快下手")
@@ -234,26 +438,25 @@ def build_message(hits, cheapest):
     return "\n".join(lines)
 
 
-# ── LINE Broadcast 群發推播 ────────────────────────────
+# ── LINE Messaging API 推播 ────────────────────────────
 def push_line(message):
-    """使用 LINE Broadcast API，傳送訊息給符合接收條件的官方帳號好友。"""
+    """使用 LINE Messaging API，將文字訊息推播給指定的 LINE 使用者。"""
 
     if DRY_RUN:
         print("── [DRY_RUN] 以下訊息不會送出 ──\n" + message)
         return
 
-    if not LINE_CHANNEL_ACCESS_TOKEN:
+    if not LINE_CHANNEL_ACCESS_TOKEN or not LINE_USER_ID:
         print(
-            "⚠️ 缺少 LINE_CHANNEL_ACCESS_TOKEN，"
+            "⚠️ 缺少 LINE_CHANNEL_ACCESS_TOKEN 或 LINE_USER_ID，"
             "跳過推播。請檢查 GitHub Repository Secrets。"
         )
         return
 
-    # LINE 單則文字訊息上限為 5000 字元，預留空間避免超限
     if len(message) > 4900:
         message = message[:4900] + "\n（訊息過長，已截斷）"
 
-    url = "https://api.line.me/v2/bot/message/broadcast"
+    url = "https://api.line.me/v2/bot/message/push"
 
     headers = {
         "Authorization": f"Bearer {LINE_CHANNEL_ACCESS_TOKEN}",
@@ -261,12 +464,13 @@ def push_line(message):
     }
 
     payload = {
+        "to": LINE_USER_ID,
         "messages": [
             {
                 "type": "text",
                 "text": message,
             }
-        ]
+        ],
     }
 
     try:
@@ -277,16 +481,16 @@ def push_line(message):
             timeout=30,
         )
 
-        print(f"LINE Broadcast 結果 HTTP {response.status_code}")
+        print(f"LINE 推播結果 HTTP {response.status_code}")
 
         if not response.ok:
             print(f"LINE API 錯誤訊息：{response.text[:1000]}")
 
         response.raise_for_status()
-        print("✅ LINE Broadcast 請求成功，已交由 LINE 處理。")
+        print("✅ LINE 推播請求成功。")
 
     except requests.RequestException as e:
-        print(f"❌ LINE Broadcast 失敗：{type(e).__name__}: {e}")
+        print(f"❌ LINE 推播失敗：{type(e).__name__}: {e}")
         raise
 
 
@@ -306,7 +510,7 @@ def main():
     print(
         f"開始掃描：{total} 個組合（{len(config.ORIGINS)} 出發 × "
         f"{len(config.DESTS)} 目的地 × {len(pairs)} 組日期）"
-        f"門檻 NT${config.THRESHOLD_TWD:,}"
+        f"門檻 NT${config.THRESHOLD_TWD:,}；排除可辨識廉航"
     )
 
     i = 0
@@ -316,7 +520,6 @@ def main():
             for dep, ret in pairs:
                 i += 1
 
-                # 每組去回程日期使用獨立識別碼
                 key = f"{origin}-{dest}-{dep.isoformat()}-{ret.isoformat()}"
 
                 try:
@@ -333,7 +536,10 @@ def main():
                     continue
 
                 if not r:
-                    print(f"[{i}/{total}] {key} 無票價")
+                    print(
+                        f"[{i}/{total}] {key} 無符合條件的票價"
+                        "（可能無票、只有廉航或抓取資料不足）"
+                    )
                     time.sleep(
                         random.uniform(config.DELAY_MIN, config.DELAY_MAX)
                     )
@@ -355,7 +561,7 @@ def main():
 
                 prev = combos.get(key, {})
 
-                # 相容舊版 state.json：舊版固定 7 晚的紀錄
+                # 相容舊版 state.json：舊版固定 7 晚。
                 if not prev and (ret - dep).days == 7:
                     legacy_key = f"{origin}-{dest}-{dep.isoformat()}"
                     prev = combos.get(legacy_key, {})
@@ -366,10 +572,9 @@ def main():
                 is_new_low = prev_low is None or price < prev_low
                 below = price <= config.THRESHOLD_TWD
 
-                # 首次達標通知；已通知過則必須達標且刷新歷史最低價
+                # 保留原本的通知判斷邏輯。
                 trigger = below and (not prev_alerted or is_new_low)
 
-                # 保留歷史最低價
                 lowest_twd = (
                     min(price, prev_low)
                     if prev_low is not None
@@ -391,7 +596,7 @@ def main():
                 elif is_new_low:
                     tag = " ↓新低"
 
-                print(f"[{i}/{total}] {key}  NT${price:,}{tag}")
+                print(f"[{i}/{total}] {key} NT${price:,}{tag}")
 
                 time.sleep(
                     random.uniform(config.DELAY_MIN, config.DELAY_MAX)
@@ -404,8 +609,9 @@ def main():
     cheapest_text = f"NT${cheapest['price']:,}" if cheapest else "—"
 
     print(
-        f"\n掃描完成：抓到 {len(all_priced)} 筆有效票價，"
-        f"{len(hits)} 筆達標觸發。全窗口最低 {cheapest_text}"
+        f"\n掃描完成：抓到 {len(all_priced)} 筆符合條件的有效票價，"
+        f"{len(hits)} 筆達標觸發。"
+        f"全窗口最低 {cheapest_text}"
     )
 
     save_state(state)
@@ -422,3 +628,4 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
+
