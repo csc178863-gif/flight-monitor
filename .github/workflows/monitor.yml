@@ -1,4 +1,4 @@
-```yaml
+
 name: flight-monitor
 
 on:
@@ -97,4 +97,3 @@ jobs:
           git commit -m "chore: update price state [skip ci]"
 
           git push origin "HEAD:${BRANCH_NAME}"
-```
