@@ -56,7 +56,7 @@ LOW_COST_AIRLINES = (
     "jetstar", "捷星",
     "spring airlines", "spring japan", "春秋航空",
     "zipair", "zip air",
-    "airasia", "air asia",
+    "airasia", "air asia", "亞洲航空",
     "vietjet", "越捷",
     "hk express", "hong kong express", "香港快運",
     "scoot", "酷航",
@@ -295,6 +295,7 @@ def fetch_combo(origin, dest, dep, ret):
         if isinstance(getattr(f, "price", None), int)
         and f.price > 0
         and not _is_low_cost(getattr(f, "airlines", None))
+        and not _is_low_cost(getattr(f, "type", None))
     ]
 
     if not priced:
