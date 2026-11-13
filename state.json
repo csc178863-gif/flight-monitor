@@ -453,39 +453,39 @@
     },
     "KHH-TYO-2027-01-24-2027-02-01": {
       "lowest_twd": 24692,
-      "last_twd": 32218,
+      "last_twd": 32224,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-24-2027-02-02": {
       "lowest_twd": 24367,
-      "last_twd": 31235,
+      "last_twd": 31265,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-25-2027-02-01": {
       "lowest_twd": 23803,
-      "last_twd": 26647,
+      "last_twd": 26653,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-25-2027-02-02": {
       "lowest_twd": 23478,
-      "last_twd": 25058,
+      "last_twd": 25086,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-25-2027-02-03": {
       "lowest_twd": 22156,
-      "last_twd": 25058,
+      "last_twd": 25086,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-26-2027-02-02": {
       "lowest_twd": 22468,
-      "last_twd": 25058,
+      "last_twd": 25086,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-26-2027-02-04": {
       "lowest_twd": 22468,
@@ -495,15 +495,15 @@
     },
     "KHH-TYO-2027-01-27-2027-02-03": {
       "lowest_twd": 19846,
-      "last_twd": 25058,
+      "last_twd": 25086,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-27-2027-02-04": {
       "lowest_twd": 21168,
-      "last_twd": 27318,
+      "last_twd": 27344,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-28-2027-02-04": {
       "lowest_twd": 22819,
@@ -513,21 +513,21 @@
     },
     "KHH-TYO-2027-01-28-2027-02-05": {
       "lowest_twd": 21494,
-      "last_twd": 25306,
+      "last_twd": 24682,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-28-2027-02-06": {
       "lowest_twd": 21494,
-      "last_twd": 25306,
+      "last_twd": 24682,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-29-2027-02-05": {
       "lowest_twd": 22323,
-      "last_twd": 25943,
+      "last_twd": 25949,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-29-2027-02-06": {
       "lowest_twd": 22323,
@@ -537,9 +537,9 @@
     },
     "KHH-TYO-2027-01-29-2027-02-07": {
       "lowest_twd": 23970,
-      "last_twd": 28076,
+      "last_twd": 28817,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-30-2027-02-07": {
       "lowest_twd": 30028,
@@ -561,9 +561,9 @@
     },
     "KHH-TYO-2027-01-31-2027-02-08": {
       "lowest_twd": 22893,
-      "last_twd": 27394,
+      "last_twd": 27344,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-31-2027-02-09": {
       "lowest_twd": 27442,
@@ -573,9 +573,9 @@
     },
     "KHH-TYO-2027-02-01-2027-02-08": {
       "lowest_twd": 20305,
-      "last_twd": 28168,
+      "last_twd": 28202,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-02-01-2027-02-09": {
       "lowest_twd": 24942,
@@ -609,9 +609,9 @@
     },
     "KHH-OSA-2027-01-24-2027-02-01": {
       "lowest_twd": 19987,
-      "last_twd": 29797,
+      "last_twd": 29819,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-01-24-2027-02-02": {
       "lowest_twd": 21275,
@@ -621,9 +621,9 @@
     },
     "KHH-OSA-2027-01-25-2027-02-01": {
       "lowest_twd": 19987,
-      "last_twd": 26047,
+      "last_twd": 26068,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-01-25-2027-02-02": {
       "lowest_twd": 19415,
@@ -681,27 +681,27 @@
     },
     "KHH-OSA-2027-01-29-2027-02-05": {
       "lowest_twd": 17471,
-      "last_twd": 23400,
+      "last_twd": 23419,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-01-29-2027-02-06": {
       "lowest_twd": 18899,
-      "last_twd": 24879,
+      "last_twd": 24901,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-01-29-2027-02-07": {
       "lowest_twd": 22506,
-      "last_twd": 25639,
+      "last_twd": 25663,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-01-30-2027-02-06": {
       "lowest_twd": 20958,
-      "last_twd": 31980,
+      "last_twd": 31987,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-01-30-2027-02-07": {
       "lowest_twd": 25465,
@@ -717,27 +717,27 @@
     },
     "KHH-OSA-2027-01-31-2027-02-08": {
       "lowest_twd": 29154,
-      "last_twd": 29154,
+      "last_twd": 29190,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-01-31-2027-02-09": {
       "lowest_twd": 29252,
-      "last_twd": 30461,
+      "last_twd": 30487,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-02-01-2027-02-08": {
       "lowest_twd": 27122,
-      "last_twd": 28019,
+      "last_twd": 28048,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-02-01-2027-02-09": {
       "lowest_twd": 27246,
-      "last_twd": 29326,
+      "last_twd": 29344,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-OSA-2027-02-01-2027-02-10": {
       "lowest_twd": 27246,
@@ -753,9 +753,9 @@
     },
     "KHH-CTS-2027-01-25-2027-02-01": {
       "lowest_twd": 32449,
-      "last_twd": 36109,
+      "last_twd": 36106,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-CTS-2027-01-25-2027-02-03": {
       "lowest_twd": 32449,
@@ -777,9 +777,9 @@
     },
     "KHH-CTS-2027-01-27-2027-02-04": {
       "lowest_twd": 35789,
-      "last_twd": 37446,
+      "last_twd": 37491,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-CTS-2027-01-27-2027-02-05": {
       "lowest_twd": 29271,
@@ -807,9 +807,9 @@
     },
     "KHH-CTS-2027-01-29-2027-02-06": {
       "lowest_twd": 36387,
-      "last_twd": 41267,
+      "last_twd": 41308,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-CTS-2027-01-30-2027-02-06": {
       "lowest_twd": 39987,
@@ -1011,9 +1011,9 @@
     },
     "RMQ-TYO-2027-01-23-2027-02-01": {
       "lowest_twd": 53812,
-      "last_twd": 66317,
+      "last_twd": 66325,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-TYO-2027-01-24-2027-02-01": {
       "lowest_twd": 30919,
@@ -1035,9 +1035,9 @@
     },
     "RMQ-TYO-2027-01-25-2027-02-02": {
       "lowest_twd": 28372,
-      "last_twd": 36509,
+      "last_twd": 36517,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-TYO-2027-01-25-2027-02-03": {
       "lowest_twd": 28372,
@@ -1071,9 +1071,9 @@
     },
     "RMQ-TYO-2027-01-27-2027-02-05": {
       "lowest_twd": 34069,
-      "last_twd": 41837,
+      "last_twd": 41845,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-TYO-2027-01-28-2027-02-04": {
       "lowest_twd": 31588,
@@ -1083,15 +1083,15 @@
     },
     "RMQ-TYO-2027-01-28-2027-02-05": {
       "lowest_twd": 36440,
-      "last_twd": 41837,
+      "last_twd": 41845,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-TYO-2027-01-28-2027-02-06": {
       "lowest_twd": 53812,
-      "last_twd": 54077,
+      "last_twd": 54085,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-TYO-2027-01-29-2027-02-05": {
       "lowest_twd": 31588,
@@ -1119,9 +1119,9 @@
     },
     "RMQ-CTS-2027-01-24-2027-02-02": {
       "lowest_twd": 48343,
-      "last_twd": 51731,
+      "last_twd": 51739,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-25-2027-02-01": {
       "lowest_twd": 43807,
@@ -1143,39 +1143,39 @@
     },
     "RMQ-CTS-2027-01-26-2027-02-02": {
       "lowest_twd": 43735,
-      "last_twd": 44483,
+      "last_twd": 44491,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T01:53:50+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-26-2027-02-03": {
       "lowest_twd": 43735,
-      "last_twd": 44483,
+      "last_twd": 44491,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-26-2027-02-04": {
       "lowest_twd": 43735,
-      "last_twd": 44483,
+      "last_twd": 44491,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-27-2027-02-03": {
       "lowest_twd": 43735,
-      "last_twd": 44483,
+      "last_twd": 44491,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-27-2027-02-04": {
       "lowest_twd": 43735,
-      "last_twd": 44483,
+      "last_twd": 44491,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-28-2027-02-04": {
       "lowest_twd": 43735,
-      "last_twd": 46019,
+      "last_twd": 46027,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-28-2027-02-05": {
       "lowest_twd": 29542,
@@ -1191,15 +1191,15 @@
     },
     "RMQ-CTS-2027-01-29-2027-02-05": {
       "lowest_twd": 27813,
-      "last_twd": 33917,
+      "last_twd": 33925,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-29-2027-02-06": {
       "lowest_twd": 27814,
-      "last_twd": 34019,
+      "last_twd": 37579,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-29-2027-02-07": {
       "lowest_twd": 27814,
@@ -1215,27 +1215,27 @@
     },
     "RMQ-CTS-2027-01-30-2027-02-07": {
       "lowest_twd": 27837,
-      "last_twd": 34019,
+      "last_twd": 34027,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-30-2027-02-08": {
       "lowest_twd": 36823,
-      "last_twd": 38771,
+      "last_twd": 38779,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-31-2027-02-07": {
       "lowest_twd": 26721,
-      "last_twd": 30131,
+      "last_twd": 30139,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-31-2027-02-08": {
       "lowest_twd": 32935,
-      "last_twd": 34883,
+      "last_twd": 34891,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OKA-2027-01-23-2027-01-30": {
       "lowest_twd": 10270,
@@ -1389,15 +1389,15 @@
     },
     "TPE-NGO-2027-01-23-2027-01-30": {
       "lowest_twd": 25877,
-      "last_twd": 46132,
+      "last_twd": 46140,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-23-2027-01-31": {
       "lowest_twd": 30718,
-      "last_twd": 50157,
+      "last_twd": 50165,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-23-2027-02-01": {
       "lowest_twd": 23756,
@@ -1407,9 +1407,9 @@
     },
     "TPE-NGO-2027-01-24-2027-01-31": {
       "lowest_twd": 26100,
-      "last_twd": 41128,
+      "last_twd": 41155,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-24-2027-02-01": {
       "lowest_twd": 25997,
@@ -1419,15 +1419,15 @@
     },
     "TPE-NGO-2027-01-24-2027-02-02": {
       "lowest_twd": 22891,
-      "last_twd": 36132,
+      "last_twd": 36146,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-25-2027-02-01": {
       "lowest_twd": 20716,
-      "last_twd": 32274,
+      "last_twd": 32300,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-25-2027-02-02": {
       "lowest_twd": 25156,
@@ -1437,9 +1437,9 @@
     },
     "TPE-NGO-2027-01-25-2027-02-03": {
       "lowest_twd": 20716,
-      "last_twd": 27630,
+      "last_twd": 27638,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-26-2027-02-02": {
       "lowest_twd": 21080,
@@ -1455,15 +1455,15 @@
     },
     "TPE-NGO-2027-01-26-2027-02-04": {
       "lowest_twd": 22149,
-      "last_twd": 28429,
+      "last_twd": 28437,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-27-2027-02-03": {
       "lowest_twd": 19716,
-      "last_twd": 28408,
+      "last_twd": 28429,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-27-2027-02-04": {
       "lowest_twd": 20519,
@@ -1479,27 +1479,27 @@
     },
     "TPE-NGO-2027-01-28-2027-02-04": {
       "lowest_twd": 22891,
-      "last_twd": 28429,
+      "last_twd": 28437,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-28-2027-02-05": {
       "lowest_twd": 21679,
-      "last_twd": 21679,
+      "last_twd": 21702,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-28-2027-02-06": {
       "lowest_twd": 22891,
-      "last_twd": 28697,
+      "last_twd": 28705,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-29-2027-02-05": {
       "lowest_twd": 23280,
-      "last_twd": 25697,
+      "last_twd": 25705,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-29-2027-02-06": {
       "lowest_twd": 26220,
@@ -1509,15 +1509,15 @@
     },
     "TPE-NGO-2027-01-29-2027-02-07": {
       "lowest_twd": 25120,
-      "last_twd": 35122,
+      "last_twd": 35130,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-30-2027-02-06": {
       "lowest_twd": 26563,
-      "last_twd": 33033,
+      "last_twd": 33041,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-30-2027-02-07": {
       "lowest_twd": 26691,
@@ -1527,39 +1527,39 @@
     },
     "TPE-NGO-2027-01-30-2027-02-08": {
       "lowest_twd": 30240,
-      "last_twd": 33667,
+      "last_twd": 33675,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-31-2027-02-07": {
       "lowest_twd": 22991,
-      "last_twd": 29932,
+      "last_twd": 29795,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-31-2027-02-08": {
       "lowest_twd": 25113,
-      "last_twd": 32472,
+      "last_twd": 29795,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-01-31-2027-02-09": {
       "lowest_twd": 25725,
-      "last_twd": 32820,
+      "last_twd": 32860,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-02-01-2027-02-08": {
       "lowest_twd": 23734,
-      "last_twd": 29787,
+      "last_twd": 29795,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-02-01-2027-02-09": {
       "lowest_twd": 24346,
-      "last_twd": 30630,
+      "last_twd": 30638,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-NGO-2027-02-01-2027-02-10": {
       "lowest_twd": 28306,
@@ -1755,21 +1755,21 @@
     },
     "TPE-TYO-2027-01-23-2027-01-31": {
       "lowest_twd": 20602,
-      "last_twd": 30398,
+      "last_twd": 30390,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-TYO-2027-01-24-2027-01-31": {
       "lowest_twd": 17602,
-      "last_twd": 25398,
+      "last_twd": 20418,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-TYO-2027-01-24-2027-02-01": {
       "lowest_twd": 17335,
-      "last_twd": 19911,
+      "last_twd": 18936,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-11T18:16:11+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-TYO-2027-01-25-2027-02-01": {
       "lowest_twd": 16224,
@@ -1797,9 +1797,9 @@
     },
     "TPE-TYO-2027-01-27-2027-02-03": {
       "lowest_twd": 17889,
-      "last_twd": 19743,
+      "last_twd": 20873,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T01:53:50+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-TYO-2027-01-27-2027-02-04": {
       "lowest_twd": 17889,
@@ -1875,9 +1875,9 @@
     },
     "TPE-OSA-2027-01-23-2027-01-31": {
       "lowest_twd": 16511,
-      "last_twd": 25950,
+      "last_twd": 23116,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-23-2027-02-01": {
       "lowest_twd": 17116,
@@ -1893,15 +1893,15 @@
     },
     "TPE-OSA-2027-01-24-2027-02-01": {
       "lowest_twd": 17160,
-      "last_twd": 27918,
+      "last_twd": 27925,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-24-2027-02-02": {
       "lowest_twd": 16822,
-      "last_twd": 27918,
+      "last_twd": 27925,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-25-2027-02-01": {
       "lowest_twd": 14461,
@@ -1911,21 +1911,21 @@
     },
     "TPE-OSA-2027-01-25-2027-02-03": {
       "lowest_twd": 14105,
-      "last_twd": 18468,
+      "last_twd": 18480,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-26-2027-02-02": {
       "lowest_twd": 14778,
-      "last_twd": 24462,
+      "last_twd": 18992,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-26-2027-02-03": {
       "lowest_twd": 14760,
-      "last_twd": 21172,
+      "last_twd": 17140,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-27-2027-02-03": {
       "lowest_twd": 14105,
@@ -1947,9 +1947,9 @@
     },
     "TPE-OSA-2027-01-28-2027-02-06": {
       "lowest_twd": 15802,
-      "last_twd": 20598,
+      "last_twd": 21108,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-29-2027-02-06": {
       "lowest_twd": 16488,
@@ -1971,15 +1971,15 @@
     },
     "TPE-OSA-2027-01-30-2027-02-07": {
       "lowest_twd": 19370,
-      "last_twd": 25814,
+      "last_twd": 25832,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-31-2027-02-08": {
       "lowest_twd": 19156,
-      "last_twd": 20928,
+      "last_twd": 23074,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-02-01-2027-02-08": {
       "lowest_twd": 18159,
@@ -1989,51 +1989,51 @@
     },
     "TPE-OSA-2027-02-01-2027-02-09": {
       "lowest_twd": 20199,
-      "last_twd": 21699,
+      "last_twd": 21721,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-02-01-2027-02-10": {
       "lowest_twd": 20427,
-      "last_twd": 23732,
+      "last_twd": 23759,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-23-2027-01-30": {
       "lowest_twd": 39731,
-      "last_twd": 40611,
+      "last_twd": 40635,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-23-2027-01-31": {
       "lowest_twd": 40570,
-      "last_twd": 40679,
+      "last_twd": 40635,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T01:53:50+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-23-2027-02-01": {
       "lowest_twd": 38288,
-      "last_twd": 40611,
+      "last_twd": 40635,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-24-2027-01-31": {
       "lowest_twd": 38967,
-      "last_twd": 40611,
+      "last_twd": 40635,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-24-2027-02-02": {
       "lowest_twd": 38889,
-      "last_twd": 41721,
+      "last_twd": 41732,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-25-2027-02-01": {
       "lowest_twd": 31561,
-      "last_twd": 39960,
+      "last_twd": 39984,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-25-2027-02-02": {
       "lowest_twd": 34132,
@@ -2055,15 +2055,15 @@
     },
     "TPE-CTS-2027-01-27-2027-02-03": {
       "lowest_twd": 32906,
-      "last_twd": 39486,
+      "last_twd": 39441,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T01:53:50+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-27-2027-02-05": {
       "lowest_twd": 27614,
-      "last_twd": 36969,
+      "last_twd": 36978,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-28-2027-02-04": {
       "lowest_twd": 38615,
@@ -2073,63 +2073,63 @@
     },
     "TPE-CTS-2027-01-28-2027-02-06": {
       "lowest_twd": 36762,
-      "last_twd": 38693,
+      "last_twd": 38715,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-29-2027-02-05": {
       "lowest_twd": 30075,
-      "last_twd": 31000,
+      "last_twd": 31009,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-29-2027-02-06": {
       "lowest_twd": 29236,
-      "last_twd": 32348,
+      "last_twd": 32369,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-29-2027-02-07": {
       "lowest_twd": 30894,
-      "last_twd": 32348,
+      "last_twd": 32369,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-30-2027-02-06": {
       "lowest_twd": 36385,
-      "last_twd": 38968,
+      "last_twd": 38989,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-30-2027-02-07": {
       "lowest_twd": 36109,
-      "last_twd": 38967,
+      "last_twd": 38989,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-30-2027-02-08": {
       "lowest_twd": 38699,
-      "last_twd": 42256,
+      "last_twd": 42282,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T12:55:03+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-31-2027-02-07": {
       "lowest_twd": 30578,
-      "last_twd": 32173,
+      "last_twd": 32163,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-31-2027-02-08": {
       "lowest_twd": 32353,
-      "last_twd": 35429,
+      "last_twd": 35456,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-02-01-2027-02-08": {
       "lowest_twd": 22774,
-      "last_twd": 41604,
+      "last_twd": 41631,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-02-01-2027-02-09": {
       "lowest_twd": 32885,
@@ -2145,21 +2145,21 @@
     },
     "KHH-TYO-2027-01-24-2027-01-31": {
       "lowest_twd": 27004,
-      "last_twd": 31235,
+      "last_twd": 31265,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-26-2027-02-03": {
       "lowest_twd": 21194,
-      "last_twd": 25058,
+      "last_twd": 25086,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-27-2027-02-05": {
       "lowest_twd": 19894,
-      "last_twd": 24352,
+      "last_twd": 24358,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-TYO-2027-01-30-2027-02-06": {
       "lowest_twd": 28367,
@@ -2210,10 +2210,10 @@
       "last_seen": "2026-10-15T13:18:50+08:00"
     },
     "KHH-CTS-2027-02-01-2027-02-08": {
-      "lowest_twd": 29309,
-      "last_twd": 29309,
+      "lowest_twd": 29306,
+      "last_twd": 29306,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "KHH-CTS-2027-02-01-2027-02-09": {
       "lowest_twd": 40187,
@@ -2253,9 +2253,9 @@
     },
     "RMQ-CTS-2027-01-27-2027-02-05": {
       "lowest_twd": 28829,
-      "last_twd": 28829,
+      "last_twd": 28837,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-TYO-2027-01-23-2027-02-01": {
       "lowest_twd": 17679,
@@ -2271,9 +2271,9 @@
     },
     "TPE-OSA-2027-01-25-2027-02-02": {
       "lowest_twd": 14158,
-      "last_twd": 20317,
+      "last_twd": 20332,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-26-2027-02-04": {
       "lowest_twd": 14813,
@@ -2289,9 +2289,9 @@
     },
     "TPE-OSA-2027-01-28-2027-02-04": {
       "lowest_twd": 17277,
-      "last_twd": 24171,
+      "last_twd": 21377,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-29-2027-02-05": {
       "lowest_twd": 15644,
@@ -2307,9 +2307,9 @@
     },
     "TPE-OSA-2027-01-31-2027-02-07": {
       "lowest_twd": 17185,
-      "last_twd": 19541,
+      "last_twd": 19559,
       "below_threshold_alerted": true,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-OSA-2027-01-31-2027-02-09": {
       "lowest_twd": 21270,
@@ -2319,9 +2319,9 @@
     },
     "TPE-CTS-2027-01-24-2027-02-01": {
       "lowest_twd": 37550,
-      "last_twd": 40611,
+      "last_twd": 40635,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-26-2027-02-03": {
       "lowest_twd": 29201,
@@ -2331,27 +2331,27 @@
     },
     "TPE-CTS-2027-01-26-2027-02-04": {
       "lowest_twd": 28172,
-      "last_twd": 41098,
+      "last_twd": 41081,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-27-2027-02-04": {
       "lowest_twd": 30780,
-      "last_twd": 41098,
+      "last_twd": 41081,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-28-2027-02-05": {
       "lowest_twd": 36407,
-      "last_twd": 37369,
+      "last_twd": 37355,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T07:10:25+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "TPE-CTS-2027-01-31-2027-02-09": {
       "lowest_twd": 39365,
-      "last_twd": 41844,
+      "last_twd": 41883,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-TYO-2027-01-26-2027-02-03": {
       "lowest_twd": 29092,
@@ -2385,9 +2385,9 @@
     },
     "TPE-CTS-2027-02-01-2027-02-10": {
       "lowest_twd": 30436,
-      "last_twd": 44274,
+      "last_twd": 44306,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-02-01-2027-02-08": {
       "lowest_twd": 32311,
@@ -2414,28 +2414,28 @@
       "last_seen": "2026-11-02T01:36:07+08:00"
     },
     "TPE-TYO-2027-01-29-2027-02-05": {
-      "lowest_twd": 22643,
-      "last_twd": 23372,
-      "below_threshold_alerted": false,
-      "last_seen": "2026-11-08T09:02:19+08:00"
+      "lowest_twd": 18449,
+      "last_twd": 18449,
+      "below_threshold_alerted": true,
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-NGO-2027-01-30-2027-02-06": {
       "lowest_twd": 37801,
-      "last_twd": 43652,
+      "last_twd": 43660,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-NGO-2027-01-28-2027-02-05": {
       "lowest_twd": 35401,
-      "last_twd": 35411,
+      "last_twd": 35423,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-NGO-2027-01-26-2027-02-03": {
       "lowest_twd": 50186,
-      "last_twd": 50194,
+      "last_twd": 50204,
       "below_threshold_alerted": false,
-      "last_seen": "2026-11-13T20:51:32+08:00"
+      "last_seen": "2026-11-14T04:17:45+08:00"
     },
     "RMQ-CTS-2027-01-31-2027-02-09": {
       "lowest_twd": 46667,
@@ -2450,5 +2450,5 @@
       "last_seen": "2026-11-01T07:02:07+08:00"
     }
   },
-  "updated": "2026-11-13T21:14:07+08:00"
+  "updated": "2026-11-14T04:40:31+08:00"
 }
